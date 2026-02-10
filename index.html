@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Alfonso & Nicolle 💕</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(180deg,#ffb6c1,#ffe6ec,#fff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family: 'Arial', sans-serif;
+  overflow:hidden;
+}
+
+/* entrada tipo sorpresa */
+.intro{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(#ff5d8f,#ff8fab);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-size:22px;
+  text-align:center;
+  z-index:10;
+  animation:fadeOut 2s ease forwards;
+  animation-delay:3s;
+}
+
+@keyframes fadeOut{
+  to{opacity:0;visibility:hidden}
+}
+
+.intro span{
+  font-size:40px;
+  animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+  50%{transform:scale(1.15)}
+}
+
+/* tarjeta */
+.card{
+  background:white;
+  padding:24px;
+  max-width:420px;
+  border-radius:22px;
+  box-shadow:0 20px 45px rgba(0,0,0,.2);
+  text-align:center;
+  position:relative;
+  z-index:2;
+  animation:pop 1.2s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(.8);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.names{
+  font-size:22px;
+  font-weight:bold;
+  color:#ff477e;
+  margin-bottom:12px;
+}
+
+.names span{
+  animation:heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat{
+  50%{transform:scale(1.1)}
+}
+
+.message{
+  font-size:16px;
+  color:#444;
+  line-height:1.7;
+  margin-bottom:20px;
+}
+
+/* árbol */
+.tree{
+  position:relative;
+  width:220px;
+  height:260px;
+  margin:0 auto 20px;
+}
+
+.heart{
+  position:absolute;
+  color:#ff4d6d;
+  animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+  50%{transform:translateY(-10px)}
+}
+
+.trunk{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  width:24px;
+  height:70px;
+  background:#9c6644;
+  transform:translateX(-50%);
+  border-radius:10px;
+}
+
+/* corazones cayendo */
+.falling{
+  position:fixed;
+  top:-20px;
+  font-size:20px;
+  animation:fall linear infinite;
+  z-index:1;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(120vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+.counter{
+  font-size:14px;
+  color:#777;
+}
+
+/* botón música */
+.music{
+  position:fixed;
+  bottom:18px;
+  right:18px;
+  background:#ff477e;
+  color:white;
+  border-radius:50%;
+  width:54px;
+  height:54px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:24px;
+  cursor:pointer;
+  z-index:3;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+</style>
+</head>
+
+<body>
+
+<div class="intro">
+  <span>❤️</span>
+  <p>Tengo algo que decirte…</p>
+</div>
+
+<div class="card">
+  <div class="names">
+    <span>Alfonso</span> & <span>Nicolle</span> 💕
+  </div>
+
+  <div class="message">
+    <strong>Para el amor de mi vida:</strong><br><br>
+    Si pudiera elegir un lugar seguro,<br>
+    sería a tu lado.<br><br>
+    Cuanto más tiempo estoy contigo,<br>
+    más te amo. ❤️<br><br>
+    — <strong>I Love You</strong>
+  </div>
+
+  <div class="tree" id="tree">
+    <div class="trunk"></div>
+  </div>
+
+  <div class="counter" id="counter"></div>
+</div>
+
+<div class="music" onclick="toggleMusic()">🎶</div>
+
+<audio id="audio" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c1e6e9c0f.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// árbol
+const tree=document.getElementById("tree");
+for(let i=0;i<100;i++){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*180+"px";
+  h.style.top=Math.random()*160+"px";
+  h.style.fontSize=14+Math.random()*16+"px";
+  h.style.animationDelay=Math.random()*2+"s";
+  tree.appendChild(h);
+}
+
+// corazones cayendo
+setInterval(()=>{
+  const f=document.createElement("div");
+  f.className="falling";
+  f.innerHTML="❤️";
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=3+Math.random()*4+"s";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),8000);
+},250);
+
+// contador
+const startDate=new Date("2025-01-18T00:00:00");
+function updateCounter(){
+  const now=new Date();
+  const diff=now-startDate;
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff/(1000*60*60))%24);
+  const m=Math.floor((diff/(1000*60))%60);
+  const s=Math.floor((diff/1000)%60);
+  counter.innerHTML=
+  `Mi amor por ti comenzó hace…<br>
+   <strong>${d}</strong> días 
+   <strong>${h}</strong> horas 
+   <strong>${m}</strong> minutos 
+   <strong>${s}</strong> segundos 💖`;
+}
+setInterval(updateCounter,1000);
+updateCounter();
+
+// música
+const audio=document.getElementById("audio");
+function toggleMusic(){
+  audio.paused?audio.play():audio.pause();
+}
+</script>
+
+</body>
+</html>
