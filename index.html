@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Alfonso 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;700&display=swap');
+
+        body, html {
+            margin: 0; padding: 0;
+            background: #fff0f3;
+            color: #5e0b15;
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Bloqueo Horizontal Forzado */
+        #rotate-notice {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #ff4d6d; color: white;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; text-align: center; padding: 20px;
+            font-size: 1.5rem; font-weight: bold;
+        }
+
+        @media (orientation: landscape) {
+            #rotate-notice { display: none; }
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 50px; text-align: center;
+            position: relative; box-sizing: border-box;
+        }
+
+        h1 { font-family: 'Dancing Script', cursive; font-size: 4rem; margin: 0; }
+
+        /* Corazón Latiendo */
+        .heart-main {
+            font-size: 100px;
+            animation: pulse 1.2s infinite;
+            filter: drop-shadow(0 0 15px rgba(255, 77, 109, 0.6));
+            margin: 20px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        .typewriter {
+            font-size: 1.8rem;
+            max-width: 700px;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
+        /* Árbol de Corazones (CSS Art) */
+        .tree-container {
+            position: relative; width: 150px; height: 200px;
+            background: #7a4a3a; margin-top: 30px;
+            border-radius: 10px 10px 0 0;
+        }
+        .tree-crown {
+            position: absolute; top: -100px; left: -75px;
+            width: 300px; height: 200px;
+        }
+        .tree-heart {
+            position: absolute; color: #ff4d6d; font-size: 25px;
+            animation: sway 3s infinite ease-in-out;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(15deg); }
+        }
+
+        /* Lluvia de corazones */
+        .heart-rain {
+            position: absolute; color: #ff8fa3; font-size: 20px;
+            pointer-events: none; animation: fall linear forwards;
+            z-index: -1;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh); opacity: 0; }
+        }
+
+        /* Temporizador */
+        #timer {
+            font-size: 2.2rem;
+            background: white;
+            padding: 20px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            color: #ff4d6d;
+            margin: 20px 0;
+        }
+
+        /* Corazón Final Alfonso */
+        .final-heart {
+            width: 200px; height: 200px;
+            background: #ff4d6d;
+            position: relative;
+            transform: rotate(-45deg);
+            display: flex; justify-content: center; align-items: center;
+            margin-top: 50px;
+            box-shadow: 0 0 30px rgba(255, 77, 109, 0.5);
+        }
+        .final-heart::before, .final-heart::after {
+            content: ""; width: 200px; height: 200px;
+            background: #ff4d6d; border-radius: 50%;
+            position: absolute;
+        }
+        .final-heart::before { top: -100px; left: 0; }
+        .final-heart::after { left: 100px; top: 0; }
+        .final-heart span {
+            transform: rotate(45deg);
+            color: white; font-size: 2rem;
+            z-index: 10; font-family: 'Dancing Script', cursive;
+        }
+
+        .scroll-down { position: absolute; bottom: 20px; font-size: 0.9rem; opacity: 0.6; }
+    </style>
+</head>
+<body>
+
+    <div id="rotate-notice">Por favor, gira tu celular horizontalmente para vivir esta sorpresa... 📱💖</div>
+
+    <section>
+        <h1>Feliz San Valentín mi amor</h1>
+        <div class="heart-main">❤️</div>
+        <div class="scroll-down">Desliza hacia abajo...</div>
+    </section>
+
+    <section>
+        <div id="text1" class="typewriter"></div>
+        <div class="tree-container">
+            <div class="tree-crown" id="tree-hearts"></div>
+        </div>
+    </section>
+
+    <section id="rain-section">
+        <div id="text2" class="typewriter"></div>
+    </section>
+
+    <section>
+        <p style="font-size: 1.5rem;">Todo el tiempo que hemos estado me has hecho muy feliz</p>
+        <div id="timer">Calculando...</div>
+        <p>Desde el 18 de enero del 2025</p>
+    </section>
+
+    <section>
+        <div id="text3" class="typewriter"></div>
+        <div class="final-heart">
+            <span>Alfonso</span>
+        </div>
+    </section>
+
+    <script>
+        const t1 = "estoy tan feliz de estar a tu lado, eres el mejor hombre del mundo, te amo Alfonso";
+        const t2 = "Mi amor,\nEn este 14 de febrero, quiero recordarte lo mucho que significas para mí. Aunque intento demostrarlo cada día, quiero aprovechar este momento para poner en palabras lo que a veces es difícil de decir con la profundidad que siento. Eres esa persona que llegó a mi vida y la llenó de colores, de sonrisas y de amor";
+        const t3 = "te hize esta pequeña animación como un detalle de lo mucho que te mereces";
+
+        let s1 = false, s2 = false, s3 = false;
+
+        function typewriter(text, id, speed = 60) {
+            let i = 0;
+            const el = document.getElementById(id);
+            function type() {
+                if (i < text.length) {
+                    el.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Crear corazones en el árbol
+        const tree = document.getElementById('tree-hearts');
+        for(let i=0; i<25; i++) {
+            const h = document.createElement('div');
+            h.innerHTML = '❤️';
+            h.className = 'tree-heart';
+            h.style.left = Math.random() * 250 + 'px';
+            h.style.top = Math.random() * 150 + 'px';
+            h.style.animationDelay = Math.random() * 2 + 's';
+            tree.appendChild(h);
+        }
+
+        // Lluvia de corazones
+        function createRain() {
+            const h = document.createElement('div');
+            h.innerHTML = '❤️';
+            h.className = 'heart-rain';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.top = '-20px';
+            h.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 5000);
+        }
+        setInterval(createRain, 300);
+
+        // Temporizador
+        function updateTimer() {
+            const start = new Date("2025-01-18T00:00:00").getTime();
+            const now = new Date().getTime();
+            const d = now - start;
+            const days = Math.floor(d / (1000 * 60 * 60 * 24));
+            const hrs = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const min = Math.floor((d % (1000
