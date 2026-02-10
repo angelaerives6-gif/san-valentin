@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Alfonso 💖</title>
+    <style>
+        /* ESTILOS (CSS) */
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Apple Chancery', 'Segoe Script', cursive;
+            background: #fff0f3;
+            overflow-x: hidden;
+            color: #5e0b15;
+            scroll-behavior: smooth;
+        }
+
+        /* Bloqueo para obligar a poner el celular de lado */
+        #rotate-device {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #ff4d6d; color: white;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; text-align: center; padding: 20px;
+            font-size: 1.5rem;
+        }
+
+        @media (orientation: landscape) {
+            #rotate-device { display: none; }
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 40px; text-align: center;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        h1 { font-size: 3.5rem; margin-bottom: 10px; animation: fadeIn 2s; }
+
+        /* Corazón Latiendo */
+        .heart-beating {
+            font-size: 120px;
+            animation: beat 1.2s infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 77, 109, 0.5));
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        /* Texto Máquina de Escribir */
+        .typewriter {
+            font-size: 2rem;
+            max-width: 800px;
+            min-height: 1.2em;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        /* Animación Niña (Placeholder) */
+        .nina-placeholder {
+            width: 150px; height: 150px;
+            margin: 20px;
+            background: url('https://cdn-icons-png.flaticon.com/512/3504/3504445.png') no-repeat center/contain;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Temporizador */
+        #timer {
+            font-size: 2.5rem;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            font-weight: bold;
+            color: #ff4d6d;
+        }
+
+        .heart-rain-container {
+            position: absolute; width: 100%; height: 100%;
+            top: 0; left: 0; pointer-events: none; overflow: hidden;
+        }
+
+        .heart-drop {
+            position: absolute; color: #ff4d6d; font-size: 25px;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh); opacity: 0; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .scroll-hint { font-size: 1rem; color: #ff8fa3; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="rotate-device">
+        <p>Gira tu celular de lado para ver mi carta, amor... 📱❤️</p>
+    </div>
+
+    <section>
+        <h1>Feliz San Valentín mi amor</h1>
+        <div class="heart-beating">❤️</div>
+        <p class="scroll-hint">Desliza hacia abajo para continuar... ↓</p>
+    </section>
+
+    <section>
+        <div id="text1" class="typewriter"></div>
+        <div class="nina-placeholder"></div>
+    </section>
+
+    <section id="long-message">
+        <div class="heart-rain-container" id="rain"></div>
+        <div id="text2" class="typewriter"></div>
+    </section>
+
+    <section>
+        <h2 style="font-size: 2rem;">Todo el tiempo que hemos estado me has hecho muy feliz</h2>
+        <div id="timer">Calculando tiempo...</div>
+        <p style="font-size: 1.5rem;">desde el 18 de enero de 2025</p>
+    </section>
+
+    <script>
+        /* LÓGICA (JavaScript) */
+        const text1Content = "estoy tan feliz de estar a tu lado, eres el mejor hombre del mundo, te amo Alfonso";
+        const text2Content = "Mi amor,\nEn este 14 de febrero, quiero recordarte lo mucho que significas para mí. Aunque intento demostrarlo cada día, quiero aprovechar este momento para poner en palabras lo que a veces es difícil de decir con la profundidad que siento. Eres esa persona que llegó a mi vida y la llenó de colores, de sonrisas y de amor";
+
+        let startedText1 = false;
+        let startedText2 = false;
+
+        function typeWriter(text, elementId, speed = 50) {
+            let i = 0;
+            const element = document.getElementById(elementId);
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Lluvia de corazones
+        function createRain() {
+            const container = document.getElementById('rain');
+            setInterval(() => {
+                const h = document.createElement('div');
+                h.innerHTML = '❤️';
+                h.classList.add('heart-drop');
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                container.appendChild(h);
+                setTimeout(() => h.remove(), 5000);
+            }, 400);
+        }
+
+        // Temporizador
+        function updateTimer() {
+            const startDate = new Date("January 18, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = `${days}d ${hours}h ${mins}m ${secs}s`;
+        }
+        setInterval(updateTimer, 1000);
+
+        // Disparar animaciones al scroll
+        window.addEventListener('scroll', () => {
+            const rect1 = document.getElementById('text1').getBoundingClientRect();
+            const rect2 = document.getElementById('text2').getBoundingClientRect();
+
+            if (rect1.top < window.innerHeight && !startedText1) {
+                startedText1 = true;
+                typeWriter(text1Content, "text1");
+            }
+            if (rect2.top < window.innerHeight && !startedText2) {
+                startedText2 = true;
+                typeWriter(text2Content, "text2");
+                createRain();
+            }
+        });
+    </script>
+</body>
+</html>
